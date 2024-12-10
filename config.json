@@ -1,0 +1,24 @@
+{
+    "questions": [
+        {
+            "id": "name",
+            "label": "Mi a neved?",
+            "type": "text",
+            "placeholder": "Írd be a neved",
+            "required": true
+        },
+        {
+            "id": "age",
+            "label": "Hány éves vagy?",
+            "type": "number",
+            "placeholder": "Írd be az életkorod",
+            "required": true
+        }
+    ],
+    "discord": {
+        "bot_token": "YOUR_DISCORD_BOT_TOKEN",
+        "server_id": "YOUR_DISCORD_SERVER_ID",
+        "role_id": "YOUR_ROLE_ID"
+    },
+    "output_file": "data.xlsx"
+}

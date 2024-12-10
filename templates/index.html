@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Kérdőív</title>
+</head>
+<body>
+    <h1>Kérdőív</h1>
+    <form id="form">
+        {% for question in questions %}
+            <label for="{{ question.id }}">{{ question.label }}</label>
+            <input
+                type="{{ question.type }}"
+                id="{{ question.id }}"
+                name="{{ question.id }}"
+                placeholder="{{ question.placeholder }}"
+                {% if question.required %}required{% endif %}
+            >
+        {% endfor %}
+        <button type="submit">Küldés</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/submit', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = result.success
+                ? `Kódod: ${result.code}`
+                : `Hiba: ${result.message}`;
+        });
+    </script>
+</body>
+</html>
